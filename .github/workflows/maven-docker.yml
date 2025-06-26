@@ -1,0 +1,29 @@
+name: Maven + Docker CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+
+    - name: Build with Maven
+      run: mvn clean package
+
+    - name: Build Docker Image
+      run: docker build -t bmi-calculator .
+
+    - name: Run Docker Container
+      run: docker run bmi-calculator 70 1.75

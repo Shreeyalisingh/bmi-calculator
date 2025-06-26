@@ -8,9 +8,12 @@ public class BMICalculator {
     }
 
     public static void main(String[] args) {
-        double weight = 70; // kg
-        double height = 1.75; // meters
+        if (args.length < 2) {
+            System.out.println("Usage: java BMICalculator <weight_kg> <height_m>");
+            return;
+        }
+        double weight = Double.parseDouble(args[0]);
+        double height = Double.parseDouble(args[1]);
         System.out.println("BMI Category: " + calculateBMI(weight, height));
     }
 }
-
